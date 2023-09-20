@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tarea3/assets/global_values.dart';
 import 'package:tarea3/home_screen.dart';
 import 'package:tarea3/screens/login_screen.dart';
 import 'package:tarea3/theme_provider.dart';
@@ -34,18 +35,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-      final checkboxState = Provider.of<CheckboxState>(context);
-
-
     return Consumer<ThemeProvider>(builder: (context, provider, child) {
       return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         themeMode: provider.themeMode,
-        home: checkboxState.isChecked ? HomeScreen() : LoginScreen(checkboxState.toggleCheckbox()),
+        //home: LoginScreen(),
+        home: GlobalValues().sessionCheck ? HomeScreen() : LoginScreen(),
+
       );
     });
   }
 }
+

@@ -9,7 +9,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool keepSessionOpen = false;
+  bool ?checkGuardarDatos = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +33,19 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
 
+
     final btnEntrar = FloatingActionButton.extended(
       icon: Icon(Icons.login),
       label: Text('Entrar'),
       onPressed: (){
-        if (keepSessionOpen) {
-
-        }
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
       },
       /*onPressed: () => 
       Navigator.push(context,
       MaterialPageRoute(builder: (context) => HomeScreen()))*/
     );
+ 
+
 
     
     return Scaffold(
@@ -69,25 +70,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 margin: EdgeInsets.symmetric(horizontal: 30),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  //color: Colors.white
                 ),
                 child: Column(
                   children: [
                     txtUser,
                     const SizedBox(height: 10,),
                     txtPass,
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: keepSessionOpen,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              keepSessionOpen = value ?? false;
-                            });
-                        }
-                        ),
-                        Text('Mantener sesion abierta')
-                      ],
+                    CheckboxListTile(
+                      value: checkGuardarDatos,
+                      title: const Text('Mantener sesion abierta'),
+                      onChanged: (value) {
+                        setState(() {
+                          checkGuardarDatos = value!;
+                        });
+                      },
                     )
                   ],
                 ),
